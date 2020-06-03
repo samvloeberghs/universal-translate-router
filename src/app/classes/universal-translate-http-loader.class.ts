@@ -10,7 +10,9 @@ export class UniversalTranslateHttpLoader {
     private readonly http: HttpClient,
     private readonly transferState: TransferState,
     private readonly platformId: object,
-    // deze moeten we er op een andere manier inkrijgen
+    // THIS URL NEEDS TO BE INJECTED ANOTHER WAY
+    // We use the full URL because the server has no notion / idea of
+    // the relativeness that the browser has
     private readonly baseUrl = 'http://localhost:4200',
     private readonly prefix = '/assets/i18n/',
     private readonly suffix = '.json') {
@@ -21,7 +23,10 @@ export class UniversalTranslateHttpLoader {
    */
   getTranslation(lang: string): Observable<object> {
     const url = this.baseUrl + this.prefix + lang + this.suffix;
-    // Make a key from the request url
+    // THIS DOESN'T WORK: JUST RELYING ON THE INTERCEPTOR
+    // return this.http.get<object>(url);
+
+    // Make a key from the lang
     const key = this.getStateKey(lang);
 
     if (isPlatformBrowser(this.platformId)) {

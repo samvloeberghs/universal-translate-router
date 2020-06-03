@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } fr
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
 import { Observable, of } from 'rxjs';
+import { isPlatformServer } from '@angular/common';
 
 @Injectable()
 export class HttpInterceptorBrowserService implements HttpInterceptor {
@@ -17,7 +18,12 @@ export class HttpInterceptorBrowserService implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
 
-    console.log('http browser interceptor', request.urlWithParams);
+    // This interceptor is included in the app module, meaning it is also included in the
+    // app server module => it executes on server AND browser.
+    // Therefor we check the platform here and just continue the handle if this is executed on the server
+    if (isPlatformServer(this.platformId)) {
+      return next.handle(request);
+    }
 
     // Only intercept GET requests
     if (request.method !== 'GET') {

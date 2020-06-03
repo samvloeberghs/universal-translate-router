@@ -20,8 +20,6 @@ export class HttpInterceptorServerService implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
 
-    console.log('http server interceptor', request.urlWithParams);
-
     // Only intercept GET requests
     if (request.method !== 'GET') {
       return next.handle(request);
