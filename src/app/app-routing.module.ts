@@ -1,15 +1,17 @@
-import { NgModule, PLATFORM_ID } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Injector, NgModule, PLATFORM_ID } from '@angular/core';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TransferState } from '@angular/platform-browser';
-import { LocalizeParser, LocalizeRouterModule, LocalizeRouterSettings } from '@gilsdav/ngx-translate-router';
-import { Location } from '@angular/common';
+import { LocalizeParser, LocalizeRouterModule, LocalizeRouterService, LocalizeRouterSettings } from '@gilsdav/ngx-translate-router';
+import { Location, LOCATION_INITIALIZED } from '@angular/common';
 
 import { UniversalTranslateHttpLoader } from './classes/universal-translate-http-loader.class';
 import { HomeComponent } from './home/home.component';
 import { UniversalLocalizeRouterHttpLoader } from './classes/universal-localize-router-http-loader.class';
 import { AboutComponent } from './about/about.component';
+import { concat } from 'rxjs';
+import { filter, first } from 'rxjs/operators';
 
 const routes: Routes = [{
   path: '',
@@ -21,6 +23,14 @@ const routes: Routes = [{
   path: 'blog',
   loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule),
 }];
+
+export function initLanguage(injector: Injector): () => void {
+  return (): Promise<any> =>
+    new Promise((resolve) => {
+      injector.get(LocalizeRouterService).init();
+      resolve();
+    });
+}
 
 // AoT requires an exported function for factories
 export function universalTranslateHttpLoaderFactory(
