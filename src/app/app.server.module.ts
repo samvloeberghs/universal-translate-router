@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
+import { LazyUniversalModuleLoaderProvider } from 'localize-router-lazy-universal-module-loader';
 
 import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
@@ -19,13 +20,17 @@ import { HttpInterceptorServerService } from './services/http-interceptor-server
     ServerTransferStateModule,
     ModuleMapLoaderModule,
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpInterceptorServerService,
-    multi: true,
-  }],
+  providers: [
+    LazyUniversalModuleLoaderProvider,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorServerService,
+      multi: true,
+    },
+  ],
   // Since the bootstrapped component is not inherited from your
   // imported AppModule, it needs to be repeated here.
   bootstrap: [AppComponent],
 })
-export class AppServerModule {}
+export class AppServerModule {
+}

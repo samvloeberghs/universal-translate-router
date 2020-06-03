@@ -2,5 +2,7 @@
   "HELLO": "Wereld",
   "BLOG": {
     "TITLE": "Laatste nieuws"
-  }
+  },
+  "ROUTES.blog": "blognl",
+  "ROUTES.about": "over"
 }

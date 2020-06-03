@@ -1,6 +1,9 @@
 {{'HELLO' | translate}}
 
-<a routerLink="/">Home</a> | <a routerLink="/blog">Blog</a>
+
+<a [routerLink]="['/'] | localize">Home</a> |
+<a [routerLink]="['/about'] | localize">About</a> |
+<a [routerLink]="['/blog'] | localize">Blog</a>
 <hr />
 
 <router-outlet></router-outlet>

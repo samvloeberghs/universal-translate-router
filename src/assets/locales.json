@@ -1,0 +1,8 @@
+{
+  "locales": [
+    "nl",
+    "en"
+  ],
+  "prefix": "ROUTES.",
+  "escapePrefix": "!"
+}

@@ -15,7 +15,8 @@ export class UniversalTranslateHttpLoader {
     // the relativeness that the browser has
     private readonly baseUrl = 'http://localhost:4200',
     private readonly prefix = '/assets/i18n/',
-    private readonly suffix = '.json') {
+    private readonly suffix = '.json',
+  ) {
   }
 
   /**
