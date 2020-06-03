@@ -4,10 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build": "npm run build:client-and-server-bundles && npm run webpack:server",
+    "build:serve": "npm run build:client-and-server-bundles && npm run webpack:server && npm run start",
+    "build:client-and-server-bundles": "ng build --prod --configuration=production && ng run universal-translate-router:server:production",
+    "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
   },
   "private": true,
   "dependencies": {
@@ -18,8 +21,15 @@
     "@angular/forms": "~8.2.14",
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
+    "@angular/platform-server": "^8.2.12",
     "@angular/router": "~8.2.14",
+    "@nguniversal/express-engine": "8.1.1",
+    "@nguniversal/module-map-ngfactory-loader": "7.0.2",
+    "@ngx-translate/core": "^12.1.2",
+    "@ngx-translate/http-loader": "^4.0.0",
+    "express": "^4.16.4",
     "rxjs": "~6.4.0",
+    "ts-loader": "^5.3.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
@@ -28,9 +38,9 @@
     "@angular/cli": "~8.3.26",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
-    "@types/node": "~8.9.4",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -42,6 +52,7 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "webpack-cli": "^3.3.11"
   }
 }
