@@ -65,7 +65,7 @@ export function defaultLangFunction(languages: string[], cachedLang?: string, br
       parser: {
         provide: LocalizeParser,
         useFactory: universalLocalizeRouterHttpLoaderFactory,
-        deps: [TranslateService, Location, LocalizeRouterSettings, HttpClient],
+        deps: [TranslateService, Location, LocalizeRouterSettings, HttpClient, TransferState, PLATFORM_ID],
       },
     }),
   ],
