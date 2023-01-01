@@ -32,12 +32,12 @@
     "express": "^4.16.4",
     "localize-router-lazy-universal-module-loader": "^1.0.0-ntr",
     "rxjs": "~6.4.0",
-    "ts-loader": "^5.3.3",
+    "ts-loader": "^9.4.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.25",
+    "@angular-devkit/build-angular": "~15.0.4",
     "@angular/cli": "~8.3.26",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
@@ -56,6 +56,6 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^5.0.1"
   }
 }
